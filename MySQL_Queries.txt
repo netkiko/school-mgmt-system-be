@@ -1,0 +1,53 @@
+CREATE DATABASE school_mgmt_db;
+
+CREATE TABLE IF NOT EXISTS `teachers` (
+  `email` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`email`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `students` (
+  `email` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`email`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `teacher_students` (
+  `teacher_email` VARCHAR(255) NOT NULL,
+  `student_email` VARCHAR(255) NOT NULL,
+  FOREIGN KEY (`teacher_email`) REFERENCES teachers(`email`),
+  FOREIGN KEY (`student_email`) REFERENCES students(`email`),
+  PRIMARY KEY (`teacher_email`, `student_email`))
+ENGINE = InnoDB;
+
+INSERT INTO `school_mgmt_db`.`teachers` (`email`, `name`) VALUES ('michael_jordan@gmail.com', 'Michael Jordan');
+INSERT INTO `school_mgmt_db`.`teachers` (`email`, `name`) VALUES ('larry_bird@gmail.com', 'Larry Bird');
+INSERT INTO `school_mgmt_db`.`teachers` (`email`, `name`) VALUES ('magic_johnson@gmail.com', 'Magic Johnson');
+
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('lebron_james@gmail.com', 'Lebron James');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('luca_doncic@gmail.com', 'Luca Doncic');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('chris_paul@gmail.com', 'Chris Paul');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('kobe_bryant@gmail.com', 'Kobe Bryant');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('stephen_curry@gmail.com', 'Stephen Curry');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('shaquille_oneal@gmail.com', 'Shauille ONeal');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('tim_duncan@gmail.com', 'Tim Duncan');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('paul_pierce@gmail.com', 'Paul Pierce');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('yao_ming@gmail.com', 'Yao Ming');
+INSERT INTO `school_mgmt_db`.`students` (`email`, `name`) VALUES ('dirk_nowitski@gmail.com', 'Dirk Nowitski');
+
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('michael_jordan@gmail.com', 'lebron_james@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('michael_jordan@gmail.com', 'luca_doncic@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('michael_jordan@gmail.com', 'chris_paul@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('michael_jordan@gmail.com', 'kobe_bryant@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('michael_jordan@gmail.com', 'paul_pierce@gmail.com');
+
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('larry_bird@gmail.com', 'kobe_bryant@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('larry_bird@gmail.com', 'luca_doncic@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('larry_bird@gmail.com', 'shaquille_oneal@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('larry_bird@gmail.com', 'tim_duncan@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('larry_bird@gmail.com', 'yao_ming@gmail.com');
+
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('magic_johnson@gmail.com', 'stephen_curry@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('magic_johnson@gmail.com', 'lebron_james@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('magic_johnson@gmail.com', 'luca_doncic@gmail.com');
+INSERT INTO `school_mgmt_db`.`teacher_students` (`teacher_email`, `student_email`) VALUES ('magic_johnson@gmail.com', 'chris_paul@gmail.com');

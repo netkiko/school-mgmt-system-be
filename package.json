@@ -1,0 +1,22 @@
+{
+    "name": "sms-be",
+    "version": "1.0.0",
+    "description": "School Management System (Backend)",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --detectOpenHandles --forceExit",
+        "start": "nodemon server.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "mysql": "^2.18.1"
+    },
+    "devDependencies": {
+        "jest": "^28.1.1",
+        "nodemon": "^2.0.16",
+        "supertest": "^6.2.3"
+    }
+}
