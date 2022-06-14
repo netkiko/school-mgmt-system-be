@@ -17,14 +17,11 @@ This is an School Management System (Backend Server) project bootstrapped with [
 
 ## Key Assumptions and Decisions Made
 
-```bash
-
-1. The application has two (2) parent tables (teachers and students) that requires proper maintenance so they have their own set of endpoints to perform CRUD functionalities. Primary key is the email address field.
-2. Registration of students to teachers requires a child table (teacher_students) to properly manage and maintain it. It will also cater queries and deletions without touching the parent tables. Take note that, teachers or students data cannot be deleted when those are in use, meaning, they exists in this child table. In other words, a teacher details cannot be deleted if there is/are student/s registered to her/him. And so for student details cannot be deleted if he/she is registered to certain teacher/s.
-3. The above-mentioned tables have equivalent endpoint route names that are easier to distinguish and maintain.
-4. Unit Testing expectations are mostly dependent to the test data provided (via MySQL_Queries.txt) so insertion of those must be performed from the Getting Started section.
-
-```
+1.  The application has two (2) parent tables (teachers and students) that requires proper maintenance so they have their own set of endpoints to perform CRUD functionalities. Primary key is the email address field.
+2.  Registration of students to teachers requires a child table (teacher_students) to properly manage and maintain it. It will also cater queries and deletions without touching the parent tables. Take note that, teachers or students data cannot be deleted when those are in use, meaning, they exists in this child table. In other words, a teacher details cannot be deleted if there is/are student/s registered to her/him. And so for student details cannot be deleted if he/she is registered to certain teacher/s.
+3.  Child table (teacher_students) uses teacher and student's primary keys as its foreign keys, that means, insertion of data in is a bit strict, as it requires that the teacher and student's emails were already there in teacher and student tables. Take note of adding data to parent tables first and use those in child table.
+4.  The above-mentioned tables have equivalent endpoint route names that are easier to distinguish and maintain.
+5.  Unit tests expectations are mostly dependent to the test data provided (via MySQL_Queries.txt) so insertion of those must be performed first from the Getting Started section.
 
 ## End-points List
 
@@ -32,11 +29,11 @@ This is an School Management System (Backend Server) project bootstrapped with [
 
 Teachers
 ----------------------------------------------------------------------------
-1.  Get All Teachers 		                        GET /api/teachers/
-2.  Get Teacher by Email	                        GET /api/teachers/:email
-3.  Create New Teacher	                            POST /api/teachers/
-4.  Update Teacher by Email	                        PUT /api/teachers/:email
-5.  Delete Teacher by Email	                        DELETE /api/teachers/:email
+1.  Get All Teachers                                GET /api/teachers/
+2.  Get Teacher by Email                            GET /api/teachers/:email
+3.  Create New Teacher                              POST /api/teachers/
+4.  Update Teacher by Email                         PUT /api/teachers/:email
+5.  Delete Teacher by Email                         DELETE /api/teachers/:email
 
 Students
 ----------------------------------------------------------------------------
@@ -48,10 +45,10 @@ Students
 
 Registered Students to Teachers
 ----------------------------------------------------------------------------
-1.  Get All Registered Students 				    GET /api/teacher_students/
-2.  Get Registered Students by Teacher's Email 	    GET /api/teacher_students/:email
-3.  Register Students to Teacher 				    POST /api/teacher_students/register/
-4.  Delete Registered Students by Teacher's Email 	DELETE /api/teacher_students/:email
+1.  Get All Registered Students                     GET /api/teacher_students/
+2.  Get Registered Students by Teacher's Email      GET /api/teacher_students/:email
+3.  Register Students to Teacher                    POST /api/teacher_students/register/
+4.  Delete Registered Students by Teacher's Email   DELETE /api/teacher_students/:email
 
 ```
 
