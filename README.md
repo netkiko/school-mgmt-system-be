@@ -15,15 +15,16 @@ This is an School Management System (Backend Server) project bootstrapped with [
 
 ```
 
-## Key Assumptions and Decisions Made
+## Improvements and Decisions Made
 
 1.  The application has two (2) parent tables (teachers and students) that requires proper maintenance so they have their own set of endpoints to perform CRUD functionalities. Primary key is the email address field.
 2.  Registration of students to teachers requires a child table (teacher_students) to properly manage and maintain it. It will also cater queries and deletions without touching the parent tables. Take note that, teachers or students data cannot be deleted when those are in use, meaning, they exists in this child table. In other words, a teacher details cannot be deleted if there is/are student/s registered to her/him. And so for student details cannot be deleted if he/she is registered to certain teacher/s.
-3.  Child table (teacher_students) uses teacher and student's primary keys as its foreign keys, that means, insertion of data in is a bit strict, as it requires that the teacher and student's emails were already there in teacher and student tables. Take note of adding data to parent tables first and use those in child table.
+3.  Child table (teacher_students) uses teacher and student's primary keys as its foreign keys, that means, insertion of data is stricter, as it requires that the teacher and student's emails were already there in teacher and student tables. Take note of adding data to parent tables first and use those in child table.
 4.  The above-mentioned tables have equivalent endpoint route names that are easier to distinguish and maintain.
 5.  Unit tests expectations are mostly dependent to the test data provided (via MySQL_Queries.txt) so insertion of those must be performed first from the Getting Started section.
+6.  Fetching of registered students to a specific teacher is a lot easier, just provide the teacher's email (you may refer to EndPoints List section) in endpoint's param. For instance that you need to fetch the common students registered to multiple teachers, just provide the comma-separated teacher emails in the endpoints's param and it will take care of it.
 
-## End-points List
+## EndPoints List
 
 ```bash
 
@@ -43,7 +44,7 @@ Students
 4.  Update Student by Email                         PUT /api/students/:email
 5.  Delete Student by Email                         DELETE /api/students/:email
 
-Registered Students to Teachers
+Registration of Students to Teachers
 ----------------------------------------------------------------------------
 1.  Get All Registered Students                     GET /api/teacher_students/
 2.  Get Registered Students by Teacher's Email      GET /api/teacher_students/:email

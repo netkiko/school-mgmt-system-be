@@ -24,10 +24,13 @@ TeacherStudent.getAllTeacherStudents = (result) => {
 
 // Fetch registered students by teacher's email
 TeacherStudent.getTeacherStudentByEmail = (email, result) => {
-    const arrEmails = email.split(",");
-    let selectSQL = "SELECT DISTINCT student_email FROM teacher_students WHERE teacher_email IN (";
+    const arrEmails = email.trim().split(",");
+    let selectSQL =
+        "SELECT rs.student_email " +
+        "FROM (SELECT student_email, count(*) as count FROM teacher_students WHERE teacher_email IN (";
     for (let i = 0; i < arrEmails.length; i++) selectSQL = selectSQL + `'${arrEmails[i]}',`;
-    selectSQL = selectSQL.substring(0, selectSQL.length - 1) + ")";
+    selectSQL = selectSQL.substring(0, selectSQL.length - 1) + ") ";
+    selectSQL += "GROUP BY student_email) AS rs WHERE rs.count=" + arrEmails.length;
 
     dbConn.query(selectSQL, (err, res) => {
         if (err) {

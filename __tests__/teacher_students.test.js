@@ -57,11 +57,8 @@ describe("Fetch Registered Students to Teachers via GET /api/teacher_students/:e
         const arrStudents = response.body.students;
         expect(arrStudents.length > 0).toBeTruthy();
         expect(arrStudents.includes("chris_paul@gmail.com")).toBeTruthy();
-        expect(arrStudents.includes("kobe_bryant@gmail.com")).toBeTruthy();
         expect(arrStudents.includes("lebron_james@gmail.com")).toBeTruthy();
         expect(arrStudents.includes("luca_doncic@gmail.com")).toBeTruthy();
-        expect(arrStudents.includes("paul_pierce@gmail.com")).toBeTruthy();
-        expect(arrStudents.includes("stephen_curry@gmail.com")).toBeTruthy();
         expect(response.statusCode).toBe(200);
     });
 });
