@@ -35,9 +35,6 @@ Student.getStudentByEmail = (email, result) => {
 
 // Insert new student
 Student.createStudent = (studentReqData, result) => {
-    // dbConn.query("SELECT email FROM students WHERE email=?", studentReqData.email, (err, res) => {
-    //     console.log("response:", res, res.length);
-    // if (res.length === 0) {
     dbConn.query("INSERT INTO students SET ?", studentReqData, (err, res) => {
         if (err) {
             console.log("Encountered error while adding new student.");
@@ -47,27 +44,6 @@ Student.createStudent = (studentReqData, result) => {
             result(null, res);
         }
     });
-    // } else {
-    //     console.log("Student already exist.");
-    //     result(null, {
-    //         status: 500,
-    //         error: "Student already exist.",
-    //     });
-    // }
-    // });
-
-    // dbConn
-    //     .query("INSERT INTO students SET ?", studentReqData)
-    //     .then((res) => {
-    //         console.log("New student was successfully added.");
-    //         result(null, res);
-    //     })
-    //     .catch((err) => {
-    //         console.log("Encountered error while adding new student.");
-    //         result(null, err);
-    //     });
-
-    // dbConn.query("INSERT INTO students SET ?", studentReqData, (err, res));
 };
 
 // Update student by email

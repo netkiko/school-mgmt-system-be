@@ -12,10 +12,10 @@ class TeacherStudent {
 TeacherStudent.getAllTeacherStudents = (result) => {
     dbConn.query("SELECT DISTINCT student_email FROM teacher_students", (err, res) => {
         if (err) {
-            console.log("Enountered error while fetching teachers' students.", err);
+            console.log("Enountered error while fetching registered students.", err);
             result(err, null);
         } else {
-            console.log("All teachers' students were successfully fetched.");
+            console.log("All registered students were successfully fetched.");
             const responseData = res.map((d) => d.student_email);
             result(null, responseData);
         }
@@ -34,7 +34,7 @@ TeacherStudent.getTeacherStudentByEmail = (email, result) => {
 
     dbConn.query(selectSQL, (err, res) => {
         if (err) {
-            console.log("Encountered error while fetching student details by email.", err);
+            console.log("Encountered error while fetching registered students by teacher's email.", err);
             result(err, null);
         } else {
             const responseData = res.map((d) => d.student_email);
