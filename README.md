@@ -56,12 +56,12 @@ Registration of Students to Teachers
 ----------------------------------------------------------------------------
 1.  Get All Registered Students                     GET /api/teacher_students/
 2.  Get Registered Students by Teacher's Email/s    GET /api/teacher_students/:email
-3.  Get Registered Commong Students
+3.  Get Registered Common Students
         by Teacher Emails                           GET /api/teacher_students/common/:email
-3.  Register Students to Teacher                    POST /api/teacher_students/register/
-4.  Delete Registered Student
+4.  Register Students to Teacher                    POST /api/teacher_students/register/
+5.  Delete Registered Student
         by Teacher and Student's Email              DELETE /api/teacher_students/:teacherEmail/:studentEmail
-5.  Delete All Registered Students
+6.  Delete All Registered Students
         by Teacher's Email                          DELETE /api/teacher_students/:email
 
 ```
