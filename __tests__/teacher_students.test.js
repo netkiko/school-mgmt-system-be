@@ -63,6 +63,19 @@ describe("Fetch Registered Students to Teachers via GET /api/teacher_students/:e
     });
 });
 
+describe("Fetch Registered Common Students to Teachers via GET /api/teacher_students/common/:email", () => {
+    test("It should respond with an array of registered common students to multiple teachers", async () => {
+        const response = await request(app).get(`/api/teacher_students/common/${teacherEmails[1]},${teacherEmails[2]}`);
+        expect(response.body).toHaveProperty("students");
+        const arrStudents = response.body.students;
+        expect(arrStudents.length > 0).toBeTruthy();
+        expect(arrStudents.includes("chris_paul@gmail.com")).toBeTruthy();
+        expect(arrStudents.includes("lebron_james@gmail.com")).toBeTruthy();
+        expect(arrStudents.includes("luca_doncic@gmail.com")).toBeTruthy();
+        expect(response.statusCode).toBe(200);
+    });
+});
+
 describe("Register Students to Teacher via POST /api/teacher_students/", () => {
     test("It should respond with error for missing 'teacher' element or empty value", async () => {
         const newStudentResp = await request(app).post("/api/teacher_students/register").send({

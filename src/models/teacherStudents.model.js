@@ -25,6 +25,24 @@ TeacherStudent.getAllTeacherStudents = (result) => {
 // Fetch registered students by teacher's email
 TeacherStudent.getTeacherStudentByEmail = (email, result) => {
     const arrEmails = email.trim().split(",");
+    let selectSQL = "SELECT DISTINCT student_email FROM teacher_students WHERE teacher_email IN (";
+    for (let i = 0; i < arrEmails.length; i++) selectSQL = selectSQL + `'${arrEmails[i]}',`;
+    selectSQL = selectSQL.substring(0, selectSQL.length - 1) + ")";
+
+    dbConn.query(selectSQL, (err, res) => {
+        if (err) {
+            console.log("Encountered error while fetching registered students by teacher's email.", err);
+            result(err, null);
+        } else {
+            const responseData = res.map((d) => d.student_email);
+            result(null, { students: responseData });
+        }
+    });
+};
+
+// Fetch registered common students by teacher's email
+TeacherStudent.getTeacherCommonStudentByEmail = (email, result) => {
+    const arrEmails = email.trim().split(",");
     let selectSQL =
         "SELECT rs.student_email " +
         "FROM (SELECT student_email, count(*) as count FROM teacher_students WHERE teacher_email IN (";
@@ -34,7 +52,7 @@ TeacherStudent.getTeacherStudentByEmail = (email, result) => {
 
     dbConn.query(selectSQL, (err, res) => {
         if (err) {
-            console.log("Encountered error while fetching registered students by teacher's email.", err);
+            console.log("Encountered error while fetching registered common students by teacher's email.", err);
             result(err, null);
         } else {
             const responseData = res.map((d) => d.student_email);

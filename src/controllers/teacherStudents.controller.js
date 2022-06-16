@@ -22,6 +22,17 @@ const getTeacherStudentByEmail = (req, res) => {
     });
 };
 
+// Get registered common students by teacher's email
+const getTeacherCommonStudentByEmail = (req, res) => {
+    TeacherStudentsModel.getTeacherCommonStudentByEmail(req.params.email, (err, data) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+    });
+};
+
 // Register students to teacher
 const createTeacherStudent = (req, res) => {
     const bodyData = req.body || {};
@@ -68,6 +79,7 @@ const deleteTeacherStudent = (req, res) => {
 module.exports = {
     getAllTeacherStudents,
     getTeacherStudentByEmail,
+    getTeacherCommonStudentByEmail,
     createTeacherStudent,
     deleteTeacherStudent,
 };

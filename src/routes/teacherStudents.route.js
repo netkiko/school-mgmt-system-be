@@ -9,6 +9,9 @@ router.get("/", teacherStudentController.getAllTeacherStudents);
 // Get registered students by teacher's email
 router.get("/:email", teacherStudentController.getTeacherStudentByEmail);
 
+// Get registered common students by teacher's email
+router.get("/common/:email", teacherStudentController.getTeacherCommonStudentByEmail);
+
 // Register students to teacher
 router.post("/register", teacherStudentController.createTeacherStudent);
 
