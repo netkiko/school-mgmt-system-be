@@ -142,7 +142,7 @@ describe("Delete Registered Student to Teacher via DELETE /:teacherEmail/:studen
         );
         expect(deleteResponse.statusCode).toBe(200);
 
-        // Verify that the deleted student does not exist in student table
+        // Verify that the deleted student does not exist in registered students table
         const response = await request(app).get(`/api/teacher_students/${teacherStudentData.teacher}`);
         expect(response.body.students.length).toBe(2);
         expect(response.body.students.includes(teacherStudentData.students[2])).toBeFalsy();
@@ -160,7 +160,7 @@ describe("Delete All Registered Students to Teacher via DELETE /api/students/:em
         );
         expect(deleteResponse.statusCode).toBe(200);
 
-        // Verify that the deleted student does not exist in student table
+        // Verify that the deleted student does not exist in registered students table
         const response = await request(app).get(`/api/teacher_students/${teacherStudentData.teacher}`);
         expect(response.body.students.length).toBe(0);
     });
