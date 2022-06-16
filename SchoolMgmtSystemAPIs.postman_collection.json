@@ -312,7 +312,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/teacher_students/michael_jordan@gmail.com,magic_johnson@gmail.com",
+					"raw": "http://localhost:4000/api/teacher_students/magic_johnson@gmail.com,michael_jordan@gmail.com",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -321,14 +321,14 @@
 					"path": [
 						"api",
 						"teacher_students",
-						"michael_jordan@gmail.com,magic_johnson@gmail.com"
+						"magic_johnson@gmail.com,michael_jordan@gmail.com"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete Registered Students by Teacher's Email",
+			"name": "Delete All Registered Students by Teacher's Email",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -365,6 +365,28 @@
 						"teacher_students",
 						"common",
 						"michael_jordan@gmail.com,magic_johnson@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Registered Student by Teacher's Email",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/teacher_students/kareem_abdul_jabbar@gmail.com/shaquille_oneal@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"teacher_students",
+						"kareem_abdul_jabbar@gmail.com",
+						"shaquille_oneal@gmail.com"
 					]
 				}
 			},

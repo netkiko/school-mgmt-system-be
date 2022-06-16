@@ -62,9 +62,9 @@ const createTeacherStudent = (req, res) => {
 };
 
 // Delete registered students by teacher's email
-const deleteTeacherStudent = (req, res) => {
+const deleteTeacherStudents = (req, res) => {
     const teacherEmail = req.params.email;
-    TeacherStudentsModel.deleteTeacherStudent(teacherEmail, (err, data) => {
+    TeacherStudentsModel.deleteTeacherStudents(teacherEmail, (err, data) => {
         if (err) {
             res.send(err);
         } else {
@@ -76,10 +76,27 @@ const deleteTeacherStudent = (req, res) => {
     });
 };
 
+// Delete registered students by teacher's email
+const deleteTeacherStudent = (req, res) => {
+    const teacherEmail = req.params.teacherEmail;
+    const studentEmail = req.params.studentEmail;
+    TeacherStudentsModel.deleteTeacherStudent(teacherEmail, studentEmail, (err, data) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send({
+                success: true,
+                message: `Student under Teacher: ${teacherEmail} was successully deleted.`,
+            });
+        }
+    });
+};
+
 module.exports = {
     getAllTeacherStudents,
     getTeacherStudentByEmail,
     getTeacherCommonStudentByEmail,
     createTeacherStudent,
+    deleteTeacherStudents,
     deleteTeacherStudent,
 };

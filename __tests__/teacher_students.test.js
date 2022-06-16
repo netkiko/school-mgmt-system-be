@@ -6,7 +6,7 @@ const app = require("../index");
 const teacherEmails = ["larry_bird@gmail.com", "magic_johnson@gmail.com", "michael_jordan@gmail.com"];
 const teacherStudentData = {
     teacher: "kareem_abdul_jabbar@gmail.com",
-    students: ["yao_ming@gmail.com", "tim_duncan@gmail.com"],
+    students: ["shaquille_oneal@gmail.com", "yao_ming@gmail.com", "tim_duncan@gmail.com"],
 };
 
 beforeAll(async () => {});
@@ -125,5 +125,43 @@ describe("Register Students to Teacher via POST /api/teacher_students/", () => {
         expect(arrStudents.length > 0).toBeTruthy();
         expect(arrStudents.includes(teacherStudentData.students[0])).toBeTruthy();
         expect(arrStudents.includes(teacherStudentData.students[1])).toBeTruthy();
+        expect(arrStudents.includes(teacherStudentData.students[2])).toBeTruthy();
+    });
+});
+
+describe("Delete Registered Student to Teacher via DELETE /:teacherEmail/:studentEmail", () => {
+    test("It should delete student resgistration to teacher", async () => {
+        const deleteResponse = await request(app).delete(
+            `/api/teacher_students/${teacherStudentData.teacher}/${teacherStudentData.students[2]}/`
+        );
+        expect(deleteResponse.body).toHaveProperty("success");
+        expect(deleteResponse.body).toHaveProperty("message");
+        expect(deleteResponse.body.success).toBe(true);
+        expect(deleteResponse.body.message).toBe(
+            `Student under Teacher: ${teacherStudentData.teacher} was successully deleted.`
+        );
+        expect(deleteResponse.statusCode).toBe(200);
+
+        // Verify that the deleted student does not exist in student table
+        const response = await request(app).get(`/api/teacher_students/${teacherStudentData.teacher}`);
+        expect(response.body.students.length).toBe(2);
+        expect(response.body.students.includes(teacherStudentData.students[2])).toBeFalsy();
+    });
+});
+
+describe("Delete All Registered Students to Teacher via DELETE /api/students/:email", () => {
+    test("It should delete students resgistration to teacher", async () => {
+        const deleteResponse = await request(app).delete(`/api/teacher_students/${teacherStudentData.teacher}`);
+        expect(deleteResponse.body).toHaveProperty("success");
+        expect(deleteResponse.body).toHaveProperty("message");
+        expect(deleteResponse.body.success).toBe(true);
+        expect(deleteResponse.body.message).toBe(
+            `Students under Teacher: ${teacherStudentData.teacher} were successully deleted.`
+        );
+        expect(deleteResponse.statusCode).toBe(200);
+
+        // Verify that the deleted student does not exist in student table
+        const response = await request(app).get(`/api/teacher_students/${teacherStudentData.teacher}`);
+        expect(response.body.students.length).toBe(0);
     });
 });

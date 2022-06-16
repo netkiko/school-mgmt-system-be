@@ -82,7 +82,7 @@ TeacherStudent.createTeacherStudent = async (reqData, result) => {
 };
 
 // Delete registered students by teacher's email
-TeacherStudent.deleteTeacherStudent = (email, result) => {
+TeacherStudent.deleteTeacherStudents = (email, result) => {
     dbConn.query("DELETE FROM teacher_students WHERE teacher_email=?", email, (err, res) => {
         if (err) {
             console.log("Encountered error while deleting registered students by teacher's email.");
@@ -91,6 +91,22 @@ TeacherStudent.deleteTeacherStudent = (email, result) => {
             result(null, res);
         }
     });
+};
+
+// Delete registered student by teacher and student's email
+TeacherStudent.deleteTeacherStudent = (teacherEmail, studentEmail, result) => {
+    dbConn.query(
+        "DELETE FROM teacher_students WHERE teacher_email=? AND student_email=?",
+        [teacherEmail, studentEmail],
+        (err, res) => {
+            if (err) {
+                console.log("Encountered error while deleting registered students by teacher's email.");
+                result(err, null);
+            } else {
+                result(null, res);
+            }
+        }
+    );
 };
 
 module.exports = TeacherStudent;

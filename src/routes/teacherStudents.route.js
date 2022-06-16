@@ -16,6 +16,9 @@ router.get("/common/:email", teacherStudentController.getTeacherCommonStudentByE
 router.post("/register", teacherStudentController.createTeacherStudent);
 
 // Delete registered students by teacher's email
-router.delete("/:email", teacherStudentController.deleteTeacherStudent);
+router.delete("/:email", teacherStudentController.deleteTeacherStudents);
+
+// Delete registered student by teacher and student's email
+router.delete("/:teacherEmail/:studentEmail", teacherStudentController.deleteTeacherStudent);
 
 module.exports = router;
